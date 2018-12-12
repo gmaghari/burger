@@ -30,9 +30,7 @@ router.post("/", function(req, res) {
 //Mark burger as "devoured"
 router.put("/:id", function(req, res) {
   var condition = "id = " + req.params.id;
-
   console.log("condition", condition);
-
   burger.updateOne({
     devoured: req.body.devoured
   }, condition, function() {

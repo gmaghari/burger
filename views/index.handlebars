@@ -1,7 +1,7 @@
 <div class="container">
     <div class="jumbotron text-center">
-        <img src="/assets/img/burger.png" alt="BURGER!" height="167" width="236">
-        <h1> Eat-Da-Burger! </h1>
+        <img src="/assets/img/burger.png" alt="burger" height="167" width="236">
+        <h1>Burger Time</h1>
     </div>
 
     <div class="row">
@@ -12,12 +12,10 @@
                     <li class="list-group-item">
                         <div class="input-group">
                             <p> {{this.burger_name}} </p>
-                            <!--<span class="input-group-btn">-->
 								<form method="POST" action="/burgers/update?_method=PUT" class="button-size">
 									<input type="hidden" type="text" name="burger_id" value={{this.id}}>
-									<button class="btn btn-default btn-lg" type="submit"> EAT IT! </button>
+									<button class="btn btn-default btn-lg" type="submit">EAT ME</button>
 								</form>
-							<!--</span>-->
                         </div>
                     </li>
                     {{/unless}} {{/each}}

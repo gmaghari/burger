@@ -15,9 +15,11 @@ var burger = {
   },
   updateOne: function(obj, condition, cb) {
     orm.updateOne('burgers', obj, condition, function(res) {
+
       cb(res);
     });
   }
 };
 
+// Export the database functions
 module.exports = burger;

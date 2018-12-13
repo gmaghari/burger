@@ -1,5 +1,5 @@
-// Set up MySql Connection
-var mysql = require('mysql');
+var mysql = require("mysql");
+
 var connection;
 
 if (process.env.JAWSDB_URL) {
@@ -7,19 +7,21 @@ if (process.env.JAWSDB_URL) {
 } else {
   connection = mysql.createConnection({
     port: 3306,
-    host: 'localhost',
-    user: 'root',
-    password: 'b00tcamp',
-    database: 'burger_db'
+    host: "localhost",
+    user: "root",
+    password: "b00tcamp",
+    database: "burger_db"
   });
 }
 
-// Make connection.
+// Make connection
 connection.connect(function(err) {
   if (err) {
-    console.error('error connecting: ' + err.stack);
+    console.error("error connecting: " + err.stack);
     return;
   }
-  console.log('connected as id ' + connection.threadId);
+  console.log("connected as id " + connection.threadId);
 });
+
+// Export connection
 module.exports = connection;

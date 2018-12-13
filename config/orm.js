@@ -1,4 +1,4 @@
-var connection = require('../config/connection.js');
+var connection = require('./config/connection.js');
 
 function printQuestionMarks(num) {
   var arr = [];
@@ -59,15 +59,13 @@ var orm = {
     query += objToSql(obj);
     query += ' WHERE ';
     query += condition;
-
-    // console.log(query);
+    //console.log
 
     connection.query(query, function(err, res) {
       if (err) {
         console.log(err);
         throw err;
       }
-      // if no error, return the result to the callback function
       cb(res);
     });
   }

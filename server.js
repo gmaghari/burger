@@ -1,41 +1,27 @@
 var express = require('express');
-var router = express();
+var path = require('path');
+var bodyParser = require('body-parser');
 
-var burger = require('../models/burger.js');
+var PORT = process.env.PORT || 3000;
 
-router.get('/', function(req, res) {
-  burger.selectAll(function(data) {
-    var hbsObject = {
-      burgers: data
-    };
-    res.render('index', hbsObject);
-  });
+var app = express();
+
+app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Set Handlebars.
+var exphbs = require('express-handlebars');
+
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+
+var routes = require('./controllers/burgers_controller.js');
+
+app.use(routes);
+
+app.listen(PORT, function() {
+  console.log('App now listening at localhost:' + PORT);
 });
-
-router.post('/api/burgers', function(req, res) {
-  burger.insertOne(['burger_name', 'devoured'], [req.body.burger_name, req.body.devoured], function(data) {
-    res.json({ id: data.insertId });
-  });
-});
-
-router.put('/api/burgers/:id', function(req, res) {
-  var condition = 'id = ' + req.params.id;
-
-  console.log('condition:', condition);
-
-  burger.updateOne(
-    {
-      devoured: req.body.devoured
-    },
-    condition,
-    function(result) {
-      if (result.changedRows == 0) {
-        return res.status(404).end();
-      } else {
-        res.status(200).end();
-      }
-    }
-  );
-});
-
-module.exports = router;
